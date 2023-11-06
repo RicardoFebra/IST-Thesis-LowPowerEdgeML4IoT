@@ -1,0 +1,11 @@
+# Data Processing
+
+The data processing directory contains the code used to process the data collected from the sensors and extract features. There are three main data processing tasks done in the edge devices: the Fast Fourier Transform (FFT), peak finding, and statistical feature extraction over time domain data.
+
+Before all the feature extraction tasks, the data is collected from the sensors and stored in a buffer. The size of the buffer is defined along with the number of windows to be processed and the number of samples per window. A single window is a set of samples collected from the sensor to be processed, by collecting several windows it is possible to process each one of them separately and then average the results. This is done to lower the weight of instantaneous impulses in the results, which can ruin the frequency domain analysis.
+
+To handle the FFT computation, the class FFT_handler was created. In this class, all the parameters necessary for the computation of the FFT are defined and the FFT is computed. To compute the FFT, first, the window is multiplied by a window function, replacing the result in the samples buffer, then the FFT is computed by making use of the FFT algorithms [aproxFFT](https://www.instructables.com/ApproxFFT-Fastest-FFT-Function-for-Arduino/) or [exactFFT](https://github.com/Klafyvel/AVR-FFT/tree/main/ExactFFT), which are contributions from the community. The magnitude of the FFT is stored in an array and is ready to be processed with the peak finding tasks.
+
+The peak finding tasks are done in the class PeakHandler. In this class, the peaks are found in the magnitude of the FFT and the frequency of the peaks is stored in an array. The peaks were found using two peak finding algorithms, the peakfinder1 and the [zscores](https://stackoverflow.com/questions/22583391/peak-signal-detection-in-realtime-timeseries-data).
+
+For the statistical feature extraction, the class StatisticalHandler was created. The statistical features are extracted from the time domain data, which is the data collected from the sensor before the FFT computation. The statistical features extracted are the mean, standard deviation, skewness, kurtosis and rms.
