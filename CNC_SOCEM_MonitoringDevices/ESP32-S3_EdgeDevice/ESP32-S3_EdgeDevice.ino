@@ -5,6 +5,7 @@
 
 #include "ESP32-S3.h"
 
+bool sleep_flag = true;
 //------------------------------------------------------------------------------------------
 //                               RTC
 
@@ -32,13 +33,21 @@ uint8_t SCK_pin = 3;
 uint8_t MISO_pin = 39;
 uint8_t MOSI_pin = 38;
 
+#define TWDT_TIMEOUT_MS         3000
+
+const esp_task_wdt_config_t twdt_config = {
+    .timeout_ms = TWDT_TIMEOUT_MS,
+    .idle_core_mask = (1 << 2) - 1,    // Bitmask of all cores
+    .trigger_panic = false,
+};
+
 void setup() {
   Serial.begin(115200);
   while (!Serial);
 
   /*------------------Set WDT----------------------------*/
   // make sure we don't get killed for our long running tasks
-  esp_task_wdt_init(10, false);
+  esp_task_wdt_init(&twdt_config);
 
   /*------------------Set BLE----------------------------*/
   // No need to start BLE here
