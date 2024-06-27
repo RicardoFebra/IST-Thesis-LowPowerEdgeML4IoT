@@ -14,3 +14,7 @@ The image above shows the two devices developed. The OpenLog Artemis is on the l
 ## Teensy 4.1 Flowchart
 
 ![Devices_flowchart](../Figures/CNCiStartLab/DevicesFlowchart.png)
+
+In this code, the DataHandler.h has the configuration of all the accelerometers used and has the initialization of all signal processing vectors and variables.
+
+In some implementations, there was no need for the complete signal processing task (FFT, Statistical features, etc). So there are some commented lines in the code that can be used to implement the complete signal processing task. These are in the beginning of the DataHandler.h file in the "Define the desired tasks" section.

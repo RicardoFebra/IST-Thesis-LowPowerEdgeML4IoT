@@ -2,9 +2,6 @@
 //                              Define the desired tasks
 /*------ACC------*/
 //#define LIS3DH_acc
-#ifndef LIS3DH_acc
-const int acc_sampling_frequency = 400; //Hz.  Can be: 0,1,10,25,50,100,200,400,1600,5000 Hz
-#endif
 //#define MMA8451_acc
 //#define LSM6DSOX_acc
 //#define LSM6DSO_acc

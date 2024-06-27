@@ -6,6 +6,13 @@
 //------------------------------------------------------------------------------------------
 //                               ACC 
 
+//const int acc_sampling_frequency = 400;                     
+/*------Define the desired ACC------*/
+//#define LIS3DH_acc
+//#define MMA8451_acc
+//#define LSM6DSOX_acc
+#define LSM6DSO_acc
+
 #include"DataHandlerAcc.h"
 int available_acc_data_counter = 0;
 
